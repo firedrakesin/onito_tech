@@ -1,0 +1,72 @@
+*{
+  box-sizing: border-box;
+}
+body{
+  margin: 40px;
+}
+.h1 {
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.h3{
+  text-align: center;
+  font-weight: 100;
+  
+}
+
+
+
+.heading {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.form-body{
+  border-style: double;
+  border-color: black;
+  padding: 10px;
+  position: relative;
+}
+
+.subheading{
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.required{
+  color: red;
+}
+
+.cbutton {
+  border-color: red;
+  align-items: center;
+}
+
+.cbutton span {
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+#marg{
+  margin-left: 10px;
+}
+
+.sbutton {
+  border-color: red;
+  align-items: center;
+}
+.sbutton span {
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+.button{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  
+}
+
