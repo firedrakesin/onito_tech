@@ -3,37 +3,53 @@ import {useForm} from "react-hook-form" ;
 import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup"
 
-const CForm = () => {
-
 const schema = yup.object().shape({
-    name: yup.string().required(), // name is required
-    dob: yup.number().positive().integer().required(),// age is required
-    sex: yup.string().required(),  // sex is required
-    mobile: yup.string().matches(/^[6-9]\d{9}$/), //should be valid Indian number
-    emergenyNumber: yup.string().matches(/^[6-9]\d{9}$/), //should be valid Indian number
-    idtype: yup.string(), // valid Aadhar or PAN
-    govtId: yup.string().when('idType', {
-    is: 'Aadhar',
-    then: yup.string().matches(/^[0-9]{12}$/, 'Invalid Aadhar number'),
-    otherwise: yup.string().matches(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, 'Invalid PAN number'),
-  }),
+  name: yup.string().required(), // name is required
+  dob: yup.number().positive().integer().required(),// age is required
+  sex: yup.string().required(),  // sex is required
+//   mobile: yup.string().matches(/^[6-9]\d{9}$/), //should be valid Indian number
+//   emergenyNumber: yup.string().matches(/^[6-9]\d{9}$/), //should be valid Indian number
+//   idtype: yup.string(), // valid Aadhar or PAN
+//   govtId: yup.string().when('idType', {
+//   is: 'Aadhar',
+//   then: yup.string().matches(/^[0-9]{12}$/, 'Invalid Aadhar number'),
+//   otherwise: yup.string().matches(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, 'Invalid PAN number'),
+// }),
 }); 
 
-const {register, handleSubmit } = useForm({
-    resolver:  yupResolver(schema),
+
+
+const CForm = () => {
+
+
+const { register, handleSubmit, formState: { errors } } = useForm({
+  resolver: yupResolver(schema),
 });
 
-
-const onSubmit = (data) =>{
-    console.log(data);
+const onSubmit = async (data) => {
+  console.log("data", data);
+  try {
+    const response = await fetch("http://localhost:3001/", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+    const responseData = await response.json();
+    console.log("responseData", responseData);
+  } catch (error) {
+    console.error(error);
+  }
 }
+
 
   return (
     <>
     <h1 className='h1'>Welcome to User Registration Form</h1>
     <h3 className='h3'>Fill in the form below and click on the submit button</h3>
     <div className='form-body'>
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form action='Post' onSubmit={handleSubmit(onSubmit)}>
         <p className='subheading'>Personal Details</p>
         <label >Name <span className="required">*</span> </label>
         <input type="text" placeholder='Enter Name' {...register("name")}  />
