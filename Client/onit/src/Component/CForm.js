@@ -58,7 +58,7 @@ const onSubmit = async (data) => {
         <label > Sex <span className="required">*</span></label>
         <input type="text" placeholder='Enter Sex' {...register("sex")} />
         <br/>
-        <label >Mobile</label>
+        {/* <label >Mobile</label>
         <input type="text" placeholder='Enter Mobile' {...register("mobile")} />
         <label>Govt Issued ID</label>
         <select {...register("idType")}>
@@ -100,7 +100,7 @@ const onSubmit = async (data) => {
         <input type="text" placeholder='Group' {...register("bloodGroup")} />
         <br/>
         <label >Nationality</label>
-        <input type="text" placeholder='Nationality' {...register("nationality")} />
+        <input type="text" placeholder='Nationality' {...register("nationality")} /> */}
         <div className='button'>
         <button className='cbutton'>Cancel<br/> <span>(esc)</span></button>
         <button className='sbutton'>Submit <span className="subtext">(esc)</span></button>
