@@ -2,6 +2,7 @@ import React from 'react';
 import {useForm} from "react-hook-form" ;
 import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup"
+import { Link } from 'react-router-dom';
 
 const schema = yup.object().shape({
   name: yup.string().required(), // name is required
@@ -22,7 +23,7 @@ const schema = yup.object().shape({
 const CForm = () => {
 
 
-const { register, handleSubmit, formState: { errors } } = useForm({
+const { register, handleSubmit } = useForm({
   resolver: yupResolver(schema),
 });
 
@@ -107,11 +108,17 @@ const onSubmit = async (data) => {
         <label >Nationality</label>
         <input type="text" placeholder='Nationality' {...register("nationality")} /> */}
         <div className='button'>
+        
         <button className='cbutton'>Cancel<br/> <span>(esc)</span></button>
         <button className='sbutton'>Submit <span className="subtext">(esc)</span></button>
         </div>
     </form>
+    
     </div>
+    
+    <Link to='/view'>
+          <button>view tables</button>
+        </Link>
     </>
   )
 }

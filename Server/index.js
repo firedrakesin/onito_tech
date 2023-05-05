@@ -1,23 +1,3 @@
-// const express = require('express');
-// const cors = require('cors');
-
-// const app = express();
-// const port = 3001;
-
-// app.use(express.json());
-// app.use(cors());
-
-
-// app.post('/', (req, res) => {
-//   console.log(req.body);
-//   res.send(req.body);
-//   res.json({ success: true });
-// });
-
-// app.listen(port, () => {
-//   console.log(`Server running on port ${port}`);
-// });
-
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -29,7 +9,6 @@ app.use(express.json());
 app.use(cors());
 
 // Connect to MongoDB Atlas
-//mongoose.connect('mongodb+srv://Firedrakesin:Garubb66@cluster0.euhtm7i.mongodb.net/test?retryWrites=true&w=majority', {
   mongoose.connect('mongodb+srv://Firedrakesin:Garubb66@cluster0.iodwiy3.mongodb.net/?retryWrites=true&w=majority',{
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -48,6 +27,18 @@ const userDataSchema = new mongoose.Schema({
 
 // Define a model for the user data collection
 const UserData = mongoose.model('userdata', userDataSchema);
+
+app.get('/users', (req, res) => {
+    UserData.find({})
+      .then((users) => {
+        res.json(users);
+      })
+      .catch((err) => {
+        console.log('Error fetching user data:', err);
+        res.status(500).send('Error fetching user data');
+      });
+  });
+  
 
 app.post('/', (req, res) => {
   console.log(req.body);
