@@ -56,7 +56,12 @@ const onSubmit = async (data) => {
         <label style={{ marginRight: '10px' }}>Date of Birth or Age <span className="required">*</span></label>
         <input type="number" placeholder='DD/MM/YYYY or Age in Years' {...register("dob")} />
         <label > Sex <span className="required">*</span></label>
-        <input type="text" placeholder='Enter Sex' {...register("sex")} />
+        <select {...register("sex")}>
+        <option value="">Enter Sex</option>
+        <option value="female">Female</option>
+        <option value="male">Male</option>
+        <option value="other">Other</option>
+      </select>
         <br/>
         {/* <label >Mobile</label>
         <input type="text" placeholder='Enter Mobile' {...register("mobile")} />

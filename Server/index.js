@@ -29,18 +29,21 @@ app.use(express.json());
 app.use(cors());
 
 // Connect to MongoDB Atlas
-mongoose.connect('mongodb+srv://Firedrakesin:Garubb66@cluster0.euhtm7i.mongodb.net/test?retryWrites=true&w=majority', {
+//mongoose.connect('mongodb+srv://Firedrakesin:Garubb66@cluster0.euhtm7i.mongodb.net/test?retryWrites=true&w=majority', {
+  mongoose.connect('mongodb+srv://Firedrakesin:Garubb66@cluster0.iodwiy3.mongodb.net/?retryWrites=true&w=majority',{
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 10000,
 })
 .then(() => console.log('Connected to MongoDB Atlas'))
 .catch((err) => console.log('Error connecting to MongoDB Atlas:', err));
 
 // Define a schema for the user data
 const userDataSchema = new mongoose.Schema({
-  name: String,
-  sex: String,
-  age: Number
+    sex: String,
+    dob: Number,
+    name: String,
+  
 });
 
 // Define a model for the user data collection
@@ -53,7 +56,7 @@ app.post('/', (req, res) => {
   const userData = new UserData({
     name: req.body.name,
     sex: req.body.sex,
-    age: req.body.age,
+    dob: req.body.dob,
   });
 
   // Save the user data to the MongoDB Atlas database
