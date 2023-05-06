@@ -79,9 +79,9 @@ const onSubmit = async (data) => {
         <option value="other">Other</option>
       </select>
         <br/>
-        {/* <label >Mobile</label>
+         <label >Mobile</label>
         <input type="text" placeholder='Enter Mobile' {...register("mobile")} />
-         <label>Govt Issued ID</label>
+        <label>Govt Issued ID</label>
         <select {...register("idType")}>
           <option value="">Select ID Type</option>
           <option value="aadhar">Aadhar</option>
@@ -133,7 +133,7 @@ const onSubmit = async (data) => {
         <select {...register("nationality")}>
           <option value="">Nationality</option>
           <option value="Indian">Indian</option>
-        </select> */}
+        </select>
         <br/>
         <div className='button'>
         

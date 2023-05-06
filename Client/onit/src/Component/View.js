@@ -17,14 +17,14 @@ const View = () => {
   }, []);
 
   const columns = [
-    { name: 'Name', selector: 'name' },
-    { name: 'Sex', selector: 'sex' },
-    { name: 'DOB', selector: 'dob' },
-    // { name: 'Mobile', selector: 'mobile' },
-    // { name: 'Address', selector: 'address' },
-    // { name: 'Govt Id', selector: 'govtID' },
-    // { name: 'Guardian Details', selector: 'gaurdian' },
-    // { name: 'Nationality', selector: 'nationality' },
+        { name: 'Name', selector: row => row['name'] },
+        { name: 'DOB', selector: row => row['dob'] },
+        { name: 'Mobile', selector: row => row['mobile'] },
+        { name: 'Sex', selector: row => row['sex'] },
+        { name: 'Address', selector: row => row['address'] },
+        { name: 'Govt Id', selector: row => row['govtID'] },
+        { name: 'Guardian Details', selector: row => row['gaurdian'] },
+        { name: 'Nationality', selector: row => row['nationality'] },
 
   ];
 
