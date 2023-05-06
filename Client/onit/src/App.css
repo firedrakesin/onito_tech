@@ -1,5 +1,6 @@
 *{
   box-sizing: border-box;
+  margin: 10px;
 }
 body{
   margin: 40px;
@@ -7,12 +8,13 @@ body{
 .h1 {
   text-align: center;
   font-family: 'Times New Roman', Times, serif;
+  margin-top: -30px;
 }
 
 .h3{
   text-align: center;
   font-weight: 100;
-  
+  margin-top: -11px;
 }
 
 
@@ -38,35 +40,111 @@ body{
   color: red;
 }
 
-.cbutton {
-  border-color: red;
-  align-items: center;
+.button-div{
+  justify-content: right ;
+  flex: auto ;
+}
+.cbutton btn-block{
+
+}
+.sbutton btn-block{
+
 }
 
-.cbutton span {
-  margin-left: 5px;
-  font-size: 14px;
+
+ .view-container {
+  background-color: #f0f0f0;
+  padding: 10px;
+  margin: 1px;
 }
 
-#marg{
-  margin-left: 10px;
+.back-button {
+  display: inline-block;
+  padding: 4px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #333;
+  text-decoration: none;
+  font-size: 10px;
 }
 
-.sbutton {
-  border-color: red;
-  align-items: center;
-}
-.sbutton span {
-  margin-left: 5px;
-  font-size: 14px;
+
+.back-button:hover {
+  background-color: #ccc;
+  color: #fff;
 }
 
-.button{
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin-right: 10px;
-  margin-bottom: 10px;
+.user-table {
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.rdt_TableHeader {
+  background-color: #f0f0f0;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: green;
+}
+
+.rdt_TableRow {
+  border-bottom: 0px solid #ccc;
+}
+
+.rdt_TableCell {
+  padding: 4px;
+}
+/* 
+.rdt_Pagination {
+  margin-top: 4px;
+  font-size: 10px;
+} */
+
+/* .rdt_PaginationPrev,
+.rdt_PaginationNext {
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #333;
+  text-decoration: none;
+} */
+
+/* .rdt_PaginationPrev:hover,
+.rdt_PaginationNext:hover {
+  background-color: #ccc;
+  color: #fff;
+} */
+
+/* .rdt_PaginationActive {
+  background-color: #333;
+  color: #fff;
+}
+
+.rdt_PaginationEllipsis {
+  padding: 10px;
+}  */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+thead {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {background-color: #f5f5f5;}
+
+.form-field{
+  margin-right: 14px;
   
 }
-
