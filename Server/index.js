@@ -22,6 +22,21 @@ const userDataSchema = new mongoose.Schema({
     sex: String,
     dob: Number,
     name: String,
+    // mobile: String,
+    // govtId: String,
+    // glable:String,
+    // email: String,
+    // emrgencyNumber: Number,
+    // address: String,
+    // state: String,
+    // city: String,
+    // country: String,
+    // pincode: Number,
+    // occupation: String,
+    // religion: String,
+    // mStatus: String,
+    // bloodGroup: String,
+    // nationality: String,
   
 });
 
@@ -29,13 +44,13 @@ const userDataSchema = new mongoose.Schema({
 const UserData = mongoose.model('userdata', userDataSchema);
 
 app.get('/users', (req, res) => {
-    UserData.find({})
-      .then((users) => {
-        res.json(users);
+    UserData.find()
+      .then((userData) => {
+        res.json(userData);
       })
       .catch((err) => {
         console.log('Error fetching user data:', err);
-        res.status(500).send('Error fetching user data');
+        res.json({ success: false });
       });
   });
   
@@ -48,8 +63,24 @@ app.post('/', (req, res) => {
     name: req.body.name,
     sex: req.body.sex,
     dob: req.body.dob,
+    // mobile: req.body.mobile,
+    // govtId: req.body.govtId,
+    // glable: req.body.glable,
+    // email: req.body.email,
+    // emrgencyNumber: req.body.emrgencyNumber,
+    // address: req.body.address,
+    // state: req.body.state,
+    // city: req.body.city,
+    // country: req.body.country,
+    // pincode: req.body.pincode,
+    // occupation: req.body.occupation,
+    // religion: req.body.religion,
+    // mStatus: req.body.mStatus,
+    // bloodGroup: req.body.bloodGroup,
+    // nationality: req.body.nationality,
   });
 
+  
   // Save the user data to the MongoDB Atlas database
   userData.save()
     .then(() => {
@@ -66,4 +97,3 @@ app.post('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
-
