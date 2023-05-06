@@ -2,19 +2,35 @@ import React from 'react';
 import {useForm} from "react-hook-form" ;
 import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup"
+import { Link } from 'react-router-dom';
 
 const schema = yup.object().shape({
   name: yup.string().required(), // name is required
   dob: yup.number().positive().integer().required(),// age is required
   sex: yup.string().required(),  // sex is required
-//   mobile: yup.string().matches(/^[6-9]\d{9}$/), //should be valid Indian number
-//   emergenyNumber: yup.string().matches(/^[6-9]\d{9}$/), //should be valid Indian number
-//   idtype: yup.string(), // valid Aadhar or PAN
+  // mobile: yup.string().test('is-indian-mobile', 'Invalid mobile number', value => {
+  //   if (!value) {
+  //     return true; // allow empty string
+  //   }
+  //   const pattern = /^(\+91[-\s])?[0]?(91)?[6789]\d{9}$/;
+  //   return pattern.test(value);
+  // }).nullable(),
+  // mobile: yup.string().matches(phoneRegExp, 'Invalid mobile number').nullable(), correct but not working
+//   emergencyNumber: yup.string().test('is-indian-mobile', 'Invalid mobile number', value => {
+//     if (!value) {
+//       return true; // allow empty string
+//     }
+//     const pattern = /^(\+91[-\s])?[0]?(91)?[6789]\d{9}$/;
+//     return pattern.test(value);
+//   }).nullable(),
+
+//   idType: yup.string(), // valid Aadhar or PAN
 //   govtId: yup.string().when('idType', {
-//   is: 'Aadhar',
-//   then: yup.string().matches(/^[0-9]{12}$/, 'Invalid Aadhar number'),
-//   otherwise: yup.string().matches(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, 'Invalid PAN number'),
+//   is: (val) => val !== undefined && val !== null && val !== '',
+//   then: yup.string().matches(/^[0-9]{12}$/ || "", 'Invalid Aadhar number')
+//     .matches(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, 'Invalid PAN number'),
 // }),
+
 }); 
 
 
@@ -22,7 +38,7 @@ const schema = yup.object().shape({
 const CForm = () => {
 
 
-const { register, handleSubmit, formState: { errors } } = useForm({
+const { register, handleSubmit } = useForm({
   resolver: yupResolver(schema),
 });
 
@@ -53,7 +69,7 @@ const onSubmit = async (data) => {
         <p className='subheading'>Personal Details</p>
         <label >Name <span className="required">*</span> </label>
         <input type="text" placeholder='Enter Name' {...register("name")}  />
-        <label style={{ marginRight: '10px' }}>Date of Birth or Age <span className="required">*</span></label>
+        <label >Date of Birth or Age <span className="required">*</span></label>
         <input type="number" placeholder='DD/MM/YYYY or Age in Years' {...register("dob")} />
         <label > Sex <span className="required">*</span></label>
         <select {...register("sex")}>
@@ -65,21 +81,27 @@ const onSubmit = async (data) => {
         <br/>
         {/* <label >Mobile</label>
         <input type="text" placeholder='Enter Mobile' {...register("mobile")} />
-        <label>Govt Issued ID</label>
+         <label>Govt Issued ID</label>
         <select {...register("idType")}>
           <option value="">Select ID Type</option>
           <option value="aadhar">Aadhar</option>
           <option value="pan">PAN</option>
         </select>
+        <input type="text" placeholder='Enter Govt ID' {...register("govtId")} />
         <br/>
         <p className='subheading'>Contact Details</p>
         <label >Guardian Details</label>
-        <input type="text" placeholder='Enter Label' {...register("label")} />
+        <select {...register("glabel")}>
+          <option value="">Enter Label</option>
+          <option value="Mother">Mother</option>
+          <option value="Father">Father</option>
+          <option value="Other">Other</option>
+        </select>
         <input type="text" placeholder='Enter Gaurdian Name' {...register("gaurdian")} />
         <label >Email</label>
         <input type="email" placeholder='Enter Email' {...register("email")} />
         <label >Emergency Contact Number</label>
-        <input type="text" placeholder='Enter Emergency No.' {...register("emergenyNumber")} />
+        <input type="Number" placeholder='Enter Emergency No.' {...register("emergenyNumber")} />
         <br/>
         <p className='subheading'>Address Details</p>
         <label >Address</label>
@@ -90,7 +112,10 @@ const onSubmit = async (data) => {
         <input type="text" placeholder='Enter city/town/village' {...register("city")} />
         <br/>
         <label >Country</label>
-        <input type="text" placeholder='Enter Country' {...register("country")} />
+        <select {...register("country")}>
+          <option value="">Enter Country</option>
+          <option value="India">India</option>
+        </select>
         <label >Pincode</label>
         <input type="number" placeholder='Enter pincode' {...register("pincode")} />
         <br/>
@@ -105,13 +130,23 @@ const onSubmit = async (data) => {
         <input type="text" placeholder='Group' {...register("bloodGroup")} />
         <br/>
         <label >Nationality</label>
-        <input type="text" placeholder='Nationality' {...register("nationality")} /> */}
+        <select {...register("nationality")}>
+          <option value="">Nationality</option>
+          <option value="Indian">Indian</option>
+        </select> */}
+        <br/>
         <div className='button'>
+        
         <button className='cbutton'>Cancel<br/> <span>(esc)</span></button>
         <button className='sbutton'>Submit <span className="subtext">(esc)</span></button>
         </div>
     </form>
+    
     </div>
+    
+    <Link to='/view'>
+          <button>view tables</button>
+        </Link>
     </>
   )
 }

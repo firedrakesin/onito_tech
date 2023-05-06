@@ -1,23 +1,3 @@
-// const express = require('express');
-// const cors = require('cors');
-
-// const app = express();
-// const port = 3001;
-
-// app.use(express.json());
-// app.use(cors());
-
-
-// app.post('/', (req, res) => {
-//   console.log(req.body);
-//   res.send(req.body);
-//   res.json({ success: true });
-// });
-
-// app.listen(port, () => {
-//   console.log(`Server running on port ${port}`);
-// });
-
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -29,7 +9,6 @@ app.use(express.json());
 app.use(cors());
 
 // Connect to MongoDB Atlas
-//mongoose.connect('mongodb+srv://Firedrakesin:Garubb66@cluster0.euhtm7i.mongodb.net/test?retryWrites=true&w=majority', {
   mongoose.connect('mongodb+srv://Firedrakesin:Garubb66@cluster0.iodwiy3.mongodb.net/?retryWrites=true&w=majority',{
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -43,11 +22,38 @@ const userDataSchema = new mongoose.Schema({
     sex: String,
     dob: Number,
     name: String,
+    // mobile: String,
+    // govtId: String,
+    // glable:String,
+    // email: String,
+    // emrgencyNumber: Number,
+    // address: String,
+    // state: String,
+    // city: String,
+    // country: String,
+    // pincode: Number,
+    // occupation: String,
+    // religion: String,
+    // mStatus: String,
+    // bloodGroup: String,
+    // nationality: String,
   
 });
 
 // Define a model for the user data collection
 const UserData = mongoose.model('userdata', userDataSchema);
+
+app.get('/users', (req, res) => {
+    UserData.find()
+      .then((userData) => {
+        res.json(userData);
+      })
+      .catch((err) => {
+        console.log('Error fetching user data:', err);
+        res.json({ success: false });
+      });
+  });
+  
 
 app.post('/', (req, res) => {
   console.log(req.body);
@@ -57,8 +63,24 @@ app.post('/', (req, res) => {
     name: req.body.name,
     sex: req.body.sex,
     dob: req.body.dob,
+    // mobile: req.body.mobile,
+    // govtId: req.body.govtId,
+    // glable: req.body.glable,
+    // email: req.body.email,
+    // emrgencyNumber: req.body.emrgencyNumber,
+    // address: req.body.address,
+    // state: req.body.state,
+    // city: req.body.city,
+    // country: req.body.country,
+    // pincode: req.body.pincode,
+    // occupation: req.body.occupation,
+    // religion: req.body.religion,
+    // mStatus: req.body.mStatus,
+    // bloodGroup: req.body.bloodGroup,
+    // nationality: req.body.nationality,
   });
 
+  
   // Save the user data to the MongoDB Atlas database
   userData.save()
     .then(() => {
@@ -75,4 +97,3 @@ app.post('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
-
