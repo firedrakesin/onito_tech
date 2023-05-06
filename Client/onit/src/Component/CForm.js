@@ -3,6 +3,8 @@ import {useForm} from "react-hook-form" ;
 import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup"
 import { Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
 
 const schema = yup.object().shape({
   name: yup.string().required(), // name is required
@@ -34,9 +36,7 @@ const schema = yup.object().shape({
 }); 
 
 
-
 const CForm = () => {
-
 
 const { register, handleSubmit } = useForm({
   resolver: yupResolver(schema),
@@ -59,19 +59,20 @@ const onSubmit = async (data) => {
   }
 }
 
-
   return (
     <>
-    <h1 className='h1'>Welcome to User Registration Form</h1>
-    <h3 className='h3'>Fill in the form below and click on the submit button</h3>
+    <h2 className='h1'>Welcome to User Registration Form</h2>
+    <Link to='/view'>
+          <button>List of saved users</button>
+        </Link>
     <div className='form-body'>
     <form action='Post' onSubmit={handleSubmit(onSubmit)}>
         <p className='subheading'>Personal Details</p>
-        <label >Name <span className="required">*</span> </label>
-        <input type="text" placeholder='Enter Name' {...register("name")}  />
-        <label >Date of Birth or Age <span className="required">*</span></label>
-        <input type="number" placeholder='DD/MM/YYYY or Age in Years' {...register("dob")} />
-        <label > Sex <span className="required">*</span></label>
+        <label >Name <span style={{marginInline:'2px'}} className="required">*</span> </label>
+        <input style={{marginInline:'12px'}} type="text" placeholder='Enter Name' {...register("name")}  />
+        <label style={{marginInline:'12px'}}>Date of Birth or Age <span className="required">*</span></label>
+        <input style={{marginInline:'12px', width: '220px'}} type="text" placeholder='DD/MM/YYYY or Age in Years' {...register("dob")} />
+        <label style={{marginInline:'12px'}}> Sex <span className="required">*</span></label>
         <select {...register("sex")}>
         <option value="">Enter Sex</option>
         <option value="female">Female</option>
@@ -79,74 +80,68 @@ const onSubmit = async (data) => {
         <option value="other">Other</option>
       </select>
         <br/>
-        {/* <label >Mobile</label>
-        <input type="text" placeholder='Enter Mobile' {...register("mobile")} />
-         <label>Govt Issued ID</label>
-        <select {...register("idType")}>
+         <label style={{marginInline:'12px'}} >Mobile</label>
+        <input style={{marginInline:'12px'}}  type="text" placeholder='Enter Mobile' {...register("mobile")} />
+        <label style={{marginInline:'12px'}} >Govt Issued ID</label>
+        <select {...register("idType")} style={{ marginRight: '10px' }}>
           <option value="">Select ID Type</option>
           <option value="aadhar">Aadhar</option>
           <option value="pan">PAN</option>
         </select>
         <input type="text" placeholder='Enter Govt ID' {...register("govtId")} />
-        <br/>
+        <br/><br/>
         <p className='subheading'>Contact Details</p>
-        <label >Guardian Details</label>
+        <label style={{marginInline:'12px'}} >Guardian Details</label>
         <select {...register("glabel")}>
           <option value="">Enter Label</option>
           <option value="Mother">Mother</option>
           <option value="Father">Father</option>
           <option value="Other">Other</option>
         </select>
-        <input type="text" placeholder='Enter Gaurdian Name' {...register("gaurdian")} />
-        <label >Email</label>
-        <input type="email" placeholder='Enter Email' {...register("email")} />
-        <label >Emergency Contact Number</label>
-        <input type="Number" placeholder='Enter Emergency No.' {...register("emergenyNumber")} />
+        <input style={{marginInline:'12px'}} type="text" placeholder='Enter Gaurdian Name' {...register("gaurdian")} />
+        <label style={{marginInline:'12px'}} >Email</label>
+        <input style={{marginInline:'12px'}} type="email" placeholder='Enter Email' {...register("email")} />
+        <label style={{marginInline:'12px'}} >Emergency Contact Number</label>
+        <input style={{marginInline:'12px'}} type="Number" placeholder='Enter Emergency No.' {...register("emergenyNumber")} />
         <br/>
         <p className='subheading'>Address Details</p>
-        <label >Address</label>
-        <input type="text" placeholder='Enter Address' {...register("address")} />
-        <label >State</label>
-        <input type="text" placeholder='Enter State' {...register("state")} />
-        <label >City</label>
-        <input type="text" placeholder='Enter city/town/village' {...register("city")} />
+        <label style={{marginInline:'12px'}} >Address</label>
+        <input style={{marginInline:'12px'}} type="text" placeholder='Enter Address' {...register("address")} />
+        <label style={{marginInline:'12px'}}>State</label>
+        <input style={{marginInline:'12px'}} type="text" placeholder='Enter State' {...register("state")} />
+        <label style={{marginInline:'12px'}}>City</label>
+        <input style={{marginInline:'12px'}} type="text" placeholder='Enter city/town/village' {...register("city")} />
         <br/>
-        <label >Country</label>
+        <label style={{marginInline:'12px'}}>Country</label>
         <select {...register("country")}>
           <option value="">Enter Country</option>
           <option value="India">India</option>
         </select>
-        <label >Pincode</label>
-        <input type="number" placeholder='Enter pincode' {...register("pincode")} />
+        <label style={{marginInline:'12px'}}>Pincode</label>
+        <input style={{marginInline:'12px'}} type="number" placeholder='Enter pincode' {...register("pincode")} />
         <br/>
         <p className='subheading'>Other Details</p>
-        <label >Occupation</label>
-        <input type="text" placeholder='Enter occupation' {...register("occupation")} />
-        <label >Religion</label>
-        <input type="text" placeholder='Enter Religion' {...register("religion")} />
-        <label >Marital Status</label>
-        <input type="text" placeholder='Enter Marital Status' {...register("mStatus")} />
-        <label >Blood Group</label>
-        <input type="text" placeholder='Group' {...register("bloodGroup")} />
+        <label style={{marginInline:'12px'}} >Occupation</label>
+        <input style={{marginInline:'12px'}} type="text" placeholder='Enter occupation' {...register("occupation")} />
+        <label style={{marginInline:'12px'}} >Religion</label>
+        <input style={{marginInline:'12px'}} type="text" placeholder='Enter Religion' {...register("religion")} />
+        <label style={{marginInline:'12px'}} >Marital Status</label>
+        <input style={{marginInline:'12px'}} type="text" placeholder='Enter Marital Status' {...register("mStatus")} />
+        <label style={{marginInline:'12px'}} >Blood Group</label>
+        <input style={{marginInline:'12px'}} type="text" placeholder='Group' {...register("bloodGroup")} />
         <br/>
-        <label >Nationality</label>
+        <label style={{marginInline:'12px'}} >Nationality</label>
         <select {...register("nationality")}>
           <option value="">Nationality</option>
           <option value="Indian">Indian</option>
-        </select> */}
-        <br/>
-        <div className='button'>
-        
-        <button className='cbutton'>Cancel<br/> <span>(esc)</span></button>
-        <button className='sbutton'>Submit <span className="subtext">(esc)</span></button>
+        </select>
+        <br/><br/>
+        <div className='button-div'>
+        <Button className='cbutton btn-block' variant="outline-danger">Danger<br/> <span style={{ textDecoration: 'underline' }}>(esc)</span></Button>{' '}
+        <Button className='sbutton btn-block' variant="success" style={{ backgroundColor: '#28a745' }}>Success<span style={{ textDecoration: 'underline' }}>(S)</span></Button>
         </div>
     </form>
-    
     </div>
-    
-    <Link to='/view'>
-          <button>view tables</button>
-        </Link>
     </>
   )
 }
