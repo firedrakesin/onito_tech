@@ -5,42 +5,55 @@ import {yupResolver} from "@hookform/resolvers/yup"
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
+import {sexOptions, bloodGroups, maritalStatusOptions,religionOptions, Cities, indianStates} from '../optiondata';
 
 const schema = yup.object().shape({
-  name: yup.string().required(), // name is required
-  dob: yup.number().positive().integer().required(),// age is required
-  sex: yup.string().required(),  // sex is required
-  // mobile: yup.string().test('is-indian-mobile', 'Invalid mobile number', value => {
-  //   if (!value) {
-  //     return true; // allow empty string
-  //   }
-  //   const pattern = /^(\+91[-\s])?[0]?(91)?[6789]\d{9}$/;
-  //   return pattern.test(value);
-  // }).nullable(),
-  // mobile: yup.string().matches(phoneRegExp, 'Invalid mobile number').nullable(), correct but not working
-//   emergencyNumber: yup.string().test('is-indian-mobile', 'Invalid mobile number', value => {
-//     if (!value) {
-//       return true; // allow empty string
-//     }
-//     const pattern = /^(\+91[-\s])?[0]?(91)?[6789]\d{9}$/;
-//     return pattern.test(value);
-//   }).nullable(),
-
-//   idType: yup.string(), // valid Aadhar or PAN
-//   govtId: yup.string().when('idType', {
-//   is: (val) => val !== undefined && val !== null && val !== '',
-//   then: yup.string().matches(/^[0-9]{12}$/ || "", 'Invalid Aadhar number')
-//     .matches(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, 'Invalid PAN number'),
-// }),
-
-}); 
-
-
+    name: yup.string().required('Name is required'),
+    dob: yup.string().required('Age is required'),
+    sex: yup.string().required('Sex is required'),
+    mobile: yup.string().nullable()
+      .test('valid-mobile','Mobile number is invalid. Please enter a 10-digit number starting with 6, 7, 8, or 9',
+        function (value) {
+          if (!value) return true;
+          const regex = /^[6-9]\d{9}$/;
+          return regex.test(value);
+        }
+      ),
+    emergencyNumber: yup.string().nullable()
+      .test('valid-emergency-number','Emergency contact number is invalid. Please enter a 10-digit number starting with 6, 7, 8, or 9',
+        function (value) {
+          if (!value) return true;
+          const regex = /^[6-9]\d{9}$/;
+          return regex.test(value);
+        }
+      ),
+    idType: yup.string().nullable(),
+    govtId: yup.string()
+      .when('idType', {
+        is: (val) => val !== undefined && val !== null && val !== '',
+        then: yup
+          .string()
+          .test('valid-aadhar', 'Aadhar number is invalid. Please enter a 12-digit number', function (value) {
+            if (!value) return true;
+            const regex = /^\d{12}$/;
+            return regex.test(value);
+          })
+          .test('valid-pan', 'PAN number is invalid. Please enter a 10-digit alphanumeric value', function (value) {
+            if (!value) return true;
+            const regex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+            return regex.test(value);
+          }),
+      })
+      .nullable(),
+  });
+ 
 const CForm = () => {
 
-const { register, handleSubmit } = useForm({
+const { register, handleSubmit, formState:{errors} } = useForm({
   resolver: yupResolver(schema),
 });
+
+
 
 const onSubmit = async (data) => {
   console.log("data", data);
@@ -66,22 +79,25 @@ const onSubmit = async (data) => {
           <button>List of saved users</button>
         </Link>
     <div className='form-body'>
-    <form action='Post' onSubmit={handleSubmit(onSubmit)}>
+    <form action='Post' onSubmit={handleSubmit(onSubmit)} id="myForm">
         <p className='subheading'>Personal Details</p>
         <label >Name<span style={{marginInline:'2px'}} className="required">*</span> </label>
-        <input style={{marginInline:'12px', width: '352px'}} type="text" placeholder='Enter Name' {...register("name")}  />
-        <label style={{marginLeft:'100px'}}>Date of Birth or Age <span style={{marginInline:'2px'}} className="required">*</span></label>
+        <input style={{marginInline:'12px', width: '352px'}} type="text" placeholder='Enter Name' {...register("name",{required:true})}  />
+        {errors.name && <p style={{ margin: 0, color: 'red' }}>{errors.name.message}</p>}
+        <label style={{marginLeft:'92px', marginTop:'-800px'}}>Date of Birth or Age <span style={{marginInline:'2px'}} className="required">*</span></label>
         <input style={{marginInline:'2px', width: '260px'}} type="text" placeholder='DD/MM/YYYY or Age in Years' {...register("dob")} />
+        {errors.dob && <p style={{ margin: 0, color: 'red' }}>{errors.dob.message}</p>}
         <label style={{marginLeft:'80px'}}> Sex <span className="required" style={{marginInline:'2px'}}>*</span></label>
-        <select {...register("sex") } style={{ width: '120px' }} >
-        <option value="">Enter Sex</option>
-        <option value="female">Female</option>
-        <option value="male">Male</option>
-        <option value="other">Other</option>
+        <select {...register("sex",{required:true}) } style={{ width: '120px' }  }  >
+        <option value=" ">Enter Sex</option>
+        {sexOptions.map(option => (
+    <option key={option.value} value={option.value}>{option.label}</option>
+  ))}
         </select>
-        <br/>
-        <label style={{marginInline:'12px'}} >Mobile</label>
+        {errors.sex && <p style={{ margin: 0, color: 'red' }}>{errors.sex.message}</p>}<br/>
+        <label style={{marginLeft:'10px'}} >Mobile</label>
         <input style={{marginInline:'12px'}}  type="text" placeholder='Enter Mobile' {...register("mobile")} />
+        {errors.mobile && <p style={{ margin: 0, color: 'red' }}>{errors.mobile.message}</p>}
         <label style={{marginLeft:'260px'}} >Govt Issued ID</label>
         <select {...register("idType")} style={{ marginRight: '12px' }}>
           <option value="">Select ID Type</option>
@@ -107,10 +123,15 @@ const onSubmit = async (data) => {
         <p className='subheading'>Address Details</p>
         <label style={{marginInline:'12px'}} >Address</label>
         <input style={{marginInline:'12px',width: '352px'}} type="text" placeholder='Enter Address' {...register("address")} />
+
         <label  style={{marginLeft:'90px'}}>State</label>
-        <input style={{marginLeft:'28px', width:'375px'}} type="text" placeholder='Enter State' {...register("state")} />
+        <select {...register("state") } style={{marginLeft:'28px', width:'375px'}}>
+        <option value="">Enter State</option>{indianStates.map((option) => (<option key={option.value} value={option.value}>{option.label}</option>))}
+      </select>
         <label style={{marginLeft:'70px'}}>City</label>
-        <input style={{marginInline:'12px'}} type="text" placeholder='Enter city/town/village' {...register("city")} />
+        <select {...register("city") } style={{marginInline:'12px'}}>
+        <option value="">Enter city/town/village</option>{Cities.map((option) => (<option key={option.value} value={option.value}>{option.label}</option>))}
+      </select>
         <br/>
         <label style={{marginInline:'12px'}}>Country</label>
         <select {...register("country")} style={{marginLeft:'10px'}}>
@@ -124,11 +145,19 @@ const onSubmit = async (data) => {
         <label style={{marginInline:'12px'}} >Occupation</label>
         <input style={{width:'340px'}} type="text" placeholder='Enter occupation' {...register("occupation")} />
         <label style={{marginLeft:'100px'}} >Religion</label>
-        <input style={{width:'120px'}} type="text" placeholder='Enter Religion' {...register("religion")} />
+        <select {...register("religion") } style={{ width: '120px' }}>
+        <option value="">Enter Religion</option>
+        {religionOptions.map((option) => (<option key={option.value} value={option.value}>{option.label}</option>))}
+        </select>
         <label style={{marginLeft:'40px'}} >Marital Status</label>
-        <input style={{marginInline:'6px', width:'160px'}} type="text" placeholder='Enter Marital Status' {...register("mStatus")} />
-        <label style={{marginInline:'12px'}} >Blood Group</label>
-        <input style={{marginInline:'12px'}} type="text" placeholder='Group' {...register("bloodGroup")} />
+        <select {...register("mStatus") } style={{ width: '160px' }}>
+          <option value="">Enter Martial Status</option>
+          {maritalStatusOptions.map((option) => (<option key={option.value} value={option.value}>{option.label}</option>))}
+        </select>
+        <label style={{marginInline:'12px', marginLeft:'30px'}} >Blood Group</label>
+        <select {...register("bloodGroup") } style={{ width: '120px' }}>
+        <option value="">Group</option>{bloodGroups.map((option) => (<option key={option.value} value={option.value}>{option.label}</option>))}
+      </select>
         <br/>
         <label style={{marginInline:'12px'}} >Nationality</label>
         <select {...register("nationality")}>
@@ -137,8 +166,8 @@ const onSubmit = async (data) => {
         </select>
         <br/><br/>
         <div className='button-div'>
-        <Button className='cbutton btn-block' variant="outline-danger">Danger<br/> <span style={{ textDecoration: 'underline' }}>(esc)</span></Button>{' '} 
-        <button className='sbutton btn-block'>Submit <br/><span style={{ textDecoration: 'underline' }}>(&#8984;S)</span></button>
+        <Button className='cbutton btn-block' variant="outline-danger">Cancel<br/> <span style={{ textDecoration: 'underline' }}>(esc)</span></Button>{' '} 
+        <button className='sbutton btn-block'type='submit' >Submit <br/><span style={{ textDecoration: 'underline' }}>(&#8984;S)</span></button>
         {/* bootstrap button other normal button */}
         </div>
     </form>
@@ -148,3 +177,11 @@ const onSubmit = async (data) => {
 }
 
 export default CForm
+
+
+
+
+
+
+
+   
