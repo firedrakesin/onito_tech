@@ -40,16 +40,35 @@ body{
   color: red;
 }
 
-.button-div{
-  justify-content: right ;
-  flex: auto ;
+.button-div {
+  display: flex;
+  
 }
-.cbutton btn-block{
 
+.cbutton.btn-block{
+  border-radius: 5px;
+  padding: 5px 40px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-right: 50px;
+  margin-left: 1050px;
+  
 }
-.sbutton btn-block{
 
+.sbutton.btn-block {
+  border-radius: 5px;
+  padding: 5px 40px;
+  background-color: #17881b;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  
 }
+
 
 
  .view-container {

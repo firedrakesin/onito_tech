@@ -68,28 +68,28 @@ const onSubmit = async (data) => {
     <div className='form-body'>
     <form action='Post' onSubmit={handleSubmit(onSubmit)}>
         <p className='subheading'>Personal Details</p>
-        <label >Name <span style={{marginInline:'2px'}} className="required">*</span> </label>
-        <input style={{marginInline:'12px'}} type="text" placeholder='Enter Name' {...register("name")}  />
-        <label style={{marginInline:'12px'}}>Date of Birth or Age <span className="required">*</span></label>
-        <input style={{marginInline:'12px', width: '220px'}} type="text" placeholder='DD/MM/YYYY or Age in Years' {...register("dob")} />
-        <label style={{marginInline:'12px'}}> Sex <span className="required">*</span></label>
-        <select {...register("sex")}>
+        <label >Name<span style={{marginInline:'2px'}} className="required">*</span> </label>
+        <input style={{marginInline:'12px', width: '352px'}} type="text" placeholder='Enter Name' {...register("name")}  />
+        <label style={{marginLeft:'100px'}}>Date of Birth or Age <span style={{marginInline:'2px'}} className="required">*</span></label>
+        <input style={{marginInline:'2px', width: '260px'}} type="text" placeholder='DD/MM/YYYY or Age in Years' {...register("dob")} />
+        <label style={{marginLeft:'80px'}}> Sex <span className="required" style={{marginInline:'2px'}}>*</span></label>
+        <select {...register("sex") } style={{ width: '120px' }} >
         <option value="">Enter Sex</option>
         <option value="female">Female</option>
         <option value="male">Male</option>
         <option value="other">Other</option>
-      </select>
+        </select>
         <br/>
-         <label style={{marginInline:'12px'}} >Mobile</label>
+        <label style={{marginInline:'12px'}} >Mobile</label>
         <input style={{marginInline:'12px'}}  type="text" placeholder='Enter Mobile' {...register("mobile")} />
-        <label style={{marginInline:'12px'}} >Govt Issued ID</label>
-        <select {...register("idType")} style={{ marginRight: '10px' }}>
+        <label style={{marginLeft:'260px'}} >Govt Issued ID</label>
+        <select {...register("idType")} style={{ marginRight: '12px' }}>
           <option value="">Select ID Type</option>
           <option value="aadhar">Aadhar</option>
           <option value="pan">PAN</option>
         </select>
         <input type="text" placeholder='Enter Govt ID' {...register("govtId")} />
-        <br/><br/>
+        <br/>
         <p className='subheading'>Contact Details</p>
         <label style={{marginInline:'12px'}} >Guardian Details</label>
         <select {...register("glabel")}>
@@ -99,34 +99,34 @@ const onSubmit = async (data) => {
           <option value="Other">Other</option>
         </select>
         <input style={{marginInline:'12px'}} type="text" placeholder='Enter Gaurdian Name' {...register("gaurdian")} />
-        <label style={{marginInline:'12px'}} >Email</label>
-        <input style={{marginInline:'12px'}} type="email" placeholder='Enter Email' {...register("email")} />
-        <label style={{marginInline:'12px'}} >Emergency Contact Number</label>
+        <label style={{marginInline:'90px'}} >Email</label>
+        <input style={{marginLeft:'-60px', width:'370px'}} type="email" placeholder='Enter Email' {...register("email")} />
+        <label style={{marginLeft:'80px'}} >Emergency<br/> Contact Number</label>
         <input style={{marginInline:'12px'}} type="Number" placeholder='Enter Emergency No.' {...register("emergenyNumber")} />
-        <br/>
+        <br/><br/>
         <p className='subheading'>Address Details</p>
         <label style={{marginInline:'12px'}} >Address</label>
-        <input style={{marginInline:'12px'}} type="text" placeholder='Enter Address' {...register("address")} />
-        <label style={{marginInline:'12px'}}>State</label>
-        <input style={{marginInline:'12px'}} type="text" placeholder='Enter State' {...register("state")} />
-        <label style={{marginInline:'12px'}}>City</label>
+        <input style={{marginInline:'12px',width: '352px'}} type="text" placeholder='Enter Address' {...register("address")} />
+        <label  style={{marginLeft:'90px'}}>State</label>
+        <input style={{marginLeft:'28px', width:'375px'}} type="text" placeholder='Enter State' {...register("state")} />
+        <label style={{marginLeft:'70px'}}>City</label>
         <input style={{marginInline:'12px'}} type="text" placeholder='Enter city/town/village' {...register("city")} />
         <br/>
         <label style={{marginInline:'12px'}}>Country</label>
-        <select {...register("country")}>
+        <select {...register("country")} style={{marginLeft:'10px'}}>
           <option value="">Enter Country</option>
           <option value="India">India</option>
         </select>
-        <label style={{marginInline:'12px'}}>Pincode</label>
-        <input style={{marginInline:'12px'}} type="number" placeholder='Enter pincode' {...register("pincode")} />
-        <br/>
+        <label style={{marginInline:'335px'}}>Pincode</label>
+        <input style={{marginLeft:'-318px'}} type="number" placeholder='Enter pincode' {...register("pincode")} />
+        <br/><br/>
         <p className='subheading'>Other Details</p>
         <label style={{marginInline:'12px'}} >Occupation</label>
-        <input style={{marginInline:'12px'}} type="text" placeholder='Enter occupation' {...register("occupation")} />
-        <label style={{marginInline:'12px'}} >Religion</label>
-        <input style={{marginInline:'12px'}} type="text" placeholder='Enter Religion' {...register("religion")} />
-        <label style={{marginInline:'12px'}} >Marital Status</label>
-        <input style={{marginInline:'12px'}} type="text" placeholder='Enter Marital Status' {...register("mStatus")} />
+        <input style={{width:'340px'}} type="text" placeholder='Enter occupation' {...register("occupation")} />
+        <label style={{marginLeft:'100px'}} >Religion</label>
+        <input style={{width:'120px'}} type="text" placeholder='Enter Religion' {...register("religion")} />
+        <label style={{marginLeft:'40px'}} >Marital Status</label>
+        <input style={{marginInline:'6px', width:'160px'}} type="text" placeholder='Enter Marital Status' {...register("mStatus")} />
         <label style={{marginInline:'12px'}} >Blood Group</label>
         <input style={{marginInline:'12px'}} type="text" placeholder='Group' {...register("bloodGroup")} />
         <br/>
@@ -137,8 +137,9 @@ const onSubmit = async (data) => {
         </select>
         <br/><br/>
         <div className='button-div'>
-        <Button className='cbutton btn-block' variant="outline-danger">Danger<br/> <span style={{ textDecoration: 'underline' }}>(esc)</span></Button>{' '}
-        <Button className='sbutton btn-block' variant="success" style={{ backgroundColor: '#28a745' }}>Success<span style={{ textDecoration: 'underline' }}>(S)</span></Button>
+        <Button className='cbutton btn-block' variant="outline-danger">Danger<br/> <span style={{ textDecoration: 'underline' }}>(esc)</span></Button>{' '} 
+        <button className='sbutton btn-block'>Submit <br/><span style={{ textDecoration: 'underline' }}>(&#8984;S)</span></button>
+        {/* bootstrap button other normal button */}
         </div>
     </form>
     </div>
