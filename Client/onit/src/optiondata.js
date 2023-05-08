@@ -29,7 +29,7 @@ const indianStates = [ //states
 
   ];
 
- const sexOptions = [ //sex options
+ const sexOptions = [ //sex options for dropdown
     { value: 'female', label: 'Female' },
     { value: 'male', label: 'Male' },
     { value: 'other', label: 'Other' },
@@ -82,7 +82,7 @@ const indianStates = [ //states
     ],
   };
 
-  const Cities = [
+  const Cities = [// city dropdown
       { value: "Visakhapatnam", label: "Visakhapatnam" },
       { value: "Vijayawada", label: "Vijayawada" },
       { value: "Guwahati", label: "Guwahati" },
@@ -96,7 +96,7 @@ const indianStates = [ //states
 
 
 
-  const idTypeOptions = [
+  const idTypeOptions = [ //Id drop down
     { value: 'passport', label: 'Passport' },
     { value: 'driverLicense', label: 'Driver License' },
     { value: 'nationalID', label: 'National ID' },
