@@ -38,7 +38,7 @@ const View = () => {
 
   return (
     <div className="view-container">
-      <Link to="/" className="back-button">
+      <Link to="/" className="back-button"> 
         Back
       </Link> <h3 className='viewp'>List of Saved Users</h3>
       <div className="user-table">

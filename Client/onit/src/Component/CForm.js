@@ -7,11 +7,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import {sexOptions, bloodGroups, maritalStatusOptions,religionOptions, Cities, indianStates} from '../optiondata';
 
-const schema = yup.object().shape({
-    name: yup.string().required('Name is required'),
-    dob: yup.string().required('Age is required'),
-    sex: yup.string().required('Sex is required'),
-    mobile: yup.string().nullable()
+const schema = yup.object().shape({//yup schema
+    name: yup.string().required('Name is required'),//required
+    dob: yup.string().required('Age is required'),//required
+    sex: yup.string().required('Sex is required'),//required
+    mobile: yup.string().nullable()// correct Indian number
       .test('valid-mobile','Mobile number is invalid. Please enter a 10-digit number starting with 6, 7, 8, or 9',
         function (value) {
           if (!value) return true;
@@ -19,7 +19,7 @@ const schema = yup.object().shape({
           return regex.test(value);
         }
       ),
-    emergencyNumber: yup.string().nullable()
+    emergencyNumber: yup.string().nullable()// correct Indian number
       .test('valid-emergency-number','Emergency contact number is invalid. Please enter a 10-digit number starting with 6, 7, 8, or 9',
         function (value) {
           if (!value) return true;
@@ -27,7 +27,7 @@ const schema = yup.object().shape({
           return regex.test(value);
         }
       ),
-    idType: yup.string().nullable(),
+    idType: yup.string().nullable(),// correct ID number
     govtId: yup.string()
       .when('idType', {
         is: (val) => val !== undefined && val !== null && val !== '',
@@ -35,16 +35,16 @@ const schema = yup.object().shape({
           .string()
           .test('valid-aadhar', 'Aadhar number is invalid. Please enter a 12-digit number', function (value) {
             if (!value) return true;
-            const regex = /^\d{12}$/;
+            const regex = /^\d{12}$/;//valid type of id is matched
             return regex.test(value);
           })
           .test('valid-pan', 'PAN number is invalid. Please enter a 10-digit alphanumeric value', function (value) {
             if (!value) return true;
-            const regex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+            const regex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;//valid type of id is matched
             return regex.test(value);
           }),
       })
-      .nullable(),
+      .nullable(),//string can be empty as well
   });
  
 const CForm = () => {
@@ -55,20 +55,20 @@ const { register, handleSubmit, formState:{errors} } = useForm({
 
 
 
-const onSubmit = async (data) => {
-  console.log("data", data);
+const onSubmit = async (data) => {                                            // onSubmit function to send data to server
+  console.log("data", data);                                                 //printing in console
   try {
-    const response = await fetch("http://localhost:3001/", {
-      method: 'POST',
+    const response = await fetch("http://localhost:3001/", {               //fetch funtion 
+      method: 'POST',                                                     // method POSt
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json'                              // type of content
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data)                                       // converting json to string for sending purpose
     });
-    const responseData = await response.json();
-    console.log("responseData", responseData);
-  } catch (error) {
-    console.error(error);
+    const responseData = await response.json();                      //converting response to json
+    console.log("responseData", responseData);                      //printing in the console
+  } catch (error) {                                                //if error
+    console.error(error);                                         //printing error in console for debugging purpose
   }
 }
 
